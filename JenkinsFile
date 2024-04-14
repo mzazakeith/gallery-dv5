@@ -1,13 +1,25 @@
 pipeline {
+
     agent any
+
     tools {
             nodejs 'nodejs'
         }
+
     stages {
-        stage('Build') {
+        stage('Install Dependencies') {
             steps {
                 sh 'npm install'
             }
         }
     }
+
+//     post {
+//             success {
+//                 // Add any post-success actions here
+//             }
+//             failure {
+//                 // Add any post-failure actions here
+//             }
+//         }
 }
