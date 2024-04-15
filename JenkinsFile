@@ -43,10 +43,15 @@ pipeline {
 
     post {
         success {
-         slackSend color: "good", message: "JOB_NAME : ${env.JOB_NAME} -> Build Number: ${env.BUILD_NUMBER} Success. Deployed at ${env.LIVE_SITE} Build Url  See ${env.BUILD_URL}"
+         slackSend color: "good", message: "\n JOB_NAME : ${env.JOB_NAME}
+         \n Build Number: ${env.BUILD_NUMBER} Success.
+         \n Deployed at ${env.LIVE_SITE}
+         \n See ${env.BUILD_URL}"
         }
         failure {
-          slackSend color: "danger", message: "JOB_NAME : ${env.JOB_NAME} -> Build Number: ${env.BUILD_NUMBER} Failed. See ${env.BUILD_URL} for details."
+          slackSend color: "danger", message: "\n JOB_NAME : ${env.JOB_NAME}
+          \n Build Number: ${env.BUILD_NUMBER} Failed.
+          \n See ${env.BUILD_URL} for details."
         }
     }
 }
