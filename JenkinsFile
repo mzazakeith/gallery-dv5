@@ -43,7 +43,7 @@ pipeline {
 
     post {
         success {
-         slackSend color: "good", message: "${env.JOB_NAME} -> Build ${env.BUILD_NUMBER} Success. Deployed at ${LIVE_SITE} Build Url  See ${env.BUILD_URL}"
+         slackSend color: "good", message: "${env.JOB_NAME} -> Build ${env.BUILD_NUMBER} Success. Deployed at ${env.LIVE_SITE} Build Url  See ${env.BUILD_URL}"
         }
         failure {
           slackSend color: "danger", message: "${env.JOB_NAME} -> Build ${env.BUILD_NUMBER} Failed. See ${env.BUILD_URL} for details."
