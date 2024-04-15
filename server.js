@@ -12,8 +12,9 @@ let image = require('./routes/image');
 const app = express();
 
 // connecting the database
+const env = process.env.ENV || 'development';
+const MONGODB_URI =  config.mongoURI[env] || config.mongoURI[app.settings.env]
 
-const MONGODB_URI = config.mongoURI[app.settings.env] || config.mongoURI['development']
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true  },(err)=>{
     if (err) {
         console.log(err)
