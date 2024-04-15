@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage ('Clone repository') {
             steps {
-                git 'https://github.com/brianmarete/gallery.git'
+                git 'https://github.com/mzazakeith/gallery-dv5'
             }
         }
 
