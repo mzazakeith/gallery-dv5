@@ -48,7 +48,7 @@ pipeline {
            echo "Build ${env.DEPLOY_ID} Succeeded. Deployed at ${LIVE_SITE}"
         }
         failure {
-            echo "Build ${env.DEPLOY_ID} failed.
+            echo "Build ${env.DEPLOY_ID} failed."
         }
     }
 }
