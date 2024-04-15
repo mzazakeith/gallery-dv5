@@ -33,21 +33,22 @@ pipeline {
         }
 
         stage ('Deploy: Deploy to render') {
-                steps {
-                    script {
-                        def response = sh(script: "curl -X POST ${DEPLOY_HOOK}", returnStdout: true).trim()
-                        env.DEPLOY_ID = readJSON text: response.toString().trim().replace(/\\/,"")
-                    }
+            steps {
+                script {
+                    def response = sh(script: "curl -X POST ${deployHook} ", returnStdout: true).trim()
+                    env.DEPLOY_ID = readJSON text: response.toString().trim().replace(/\\/,"")
                 }
             }
+        }
+
     }
 
     post {
-            success {
-               echo "Build ${env.DEPLOY_ID} Succeeded. Deployed at ${LIVE_SITE}"
-            }
-            failure {
-                slackSend color: "danger", message: "Build ${env.DEPLOY_ID} failed. See ${env.BUILD_URL} for details."
-            }
+        success {
+           echo "Build ${env.DEPLOY_ID} Succeeded. Deployed at ${LIVE_SITE}"
         }
+        failure {
+            echo "Build ${env.DEPLOY_ID} failed.
+        }
+    }
 }
