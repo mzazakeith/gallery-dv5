@@ -7,17 +7,24 @@ pipeline {
         }
 
     stages {
+        stage ('Clone repository') {
+            steps {
+                git 'https://github.com/brianmarete/gallery.git'
+            }
+        }
+
+
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
             }
         }
 
-        stage('Build') {
-                    steps {
-                        sh 'npm run build'
-                    }
-                }
+        stage ('Run tests') {
+            steps {
+                sh 'npm test'
+            }
+        }
 
 
     }
