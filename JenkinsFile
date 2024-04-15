@@ -1,0 +1,52 @@
+pipeline {
+
+    agent any
+
+    environment {
+        DEPLOY_HOOK='https://api.render.com/deploy/srv-coem7pa0si5c739kscig?key=onL91qArcu0'
+
+        LIVE_SITE = 'jbjhb'
+
+    }
+
+    tools {
+            nodejs 'nodejs'
+        }
+
+    stages {
+        stage ('Clone repository') {
+            steps {
+                git 'https://github.com/mzazakeith/gallery-dv5'
+            }
+        }
+
+
+        stage('Build: Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage ('Test: Run tests') {
+            steps {
+                sh 'npm test'
+            }
+        }
+
+        stage ('Deploy: Deploy to render') {
+            steps {
+             sh "curl -X POST ${DEPLOY_HOOK}"
+            }
+        }
+
+    }
+
+//     post {
+//         success {
+//            echo "Build ${env.DEPLOY_RESPONSE} Succeeded. Deployed at ${env.LIVE_SITE}"
+//         }
+//         failure {
+//             echo "Build ${env.DEPLOY_RESPONSE} failed."
+//         }
+//     }
+}
