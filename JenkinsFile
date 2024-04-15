@@ -5,7 +5,7 @@ pipeline {
     environment {
         DEPLOY_HOOK='https://api.render.com/deploy/srv-coem7pa0si5c739kscig?key=onL91qArcu0'
 
-        LIVE_SITE = 'jbjhb'
+        LIVE_SITE = 'https://gallery-dv5.onrender.com'
 
     }
 
@@ -43,10 +43,10 @@ pipeline {
 
     post {
         success {
-         slackSend color: "good", message: "${env.JOB_NAME} -> Build ${env.BUILD_NUMBER} Success. Deployed at ${env.LIVE_SITE} Build Url  See ${env.BUILD_URL}"
+         slackSend color: "good", message: "JOB_NAME : ${env.JOB_NAME} -> Build Number: ${env.BUILD_NUMBER} Success. Deployed at ${env.LIVE_SITE} Build Url  See ${env.BUILD_URL}"
         }
         failure {
-          slackSend color: "danger", message: "${env.JOB_NAME} -> Build ${env.BUILD_NUMBER} Failed. See ${env.BUILD_URL} for details."
+          slackSend color: "danger", message: "JOB_NAME : ${env.JOB_NAME} -> Build Number: ${env.BUILD_NUMBER} Failed. See ${env.BUILD_URL} for details."
         }
     }
 }
