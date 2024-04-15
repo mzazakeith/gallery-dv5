@@ -4,6 +4,8 @@ pipeline {
 
     environment {
         DEPLOY_HOOK="https://api.render.com/deploy/srv-coem7pa0si5c739kscig?key=onL91qArcu0"
+
+        LIVE_SITE = 'https://secret-shore-37984.herokuapp.com/'
     }
 
     tools {
@@ -32,17 +34,20 @@ pipeline {
 
         stage ('Deploy: Deploy to render') {
                 steps {
-                    sh "curl -X POST ${DEPLOY_HOOK}"
+                    script {
+                        def response = sh(script: "curl -X POST ${DEPLOY_HOOK}", returnStdout: true).trim()
+                        env.DEPLOY_ID = readJSON text: response.toString().trim().replace(/\\/,"")
+                    }
                 }
             }
     }
 
-//     post {
-//             success {
-//                 // Add any post-success actions here
-//             }
-//             failure {
-//                 // Add any post-failure actions here
-//             }
-//         }
+    post {
+            success {
+               echo "Build ${env.DEPLOY_ID} Succeeded. Deployed at ${LIVE_SITE}"
+            }
+            failure {
+                slackSend color: "danger", message: "Build ${env.DEPLOY_ID} failed. See ${env.BUILD_URL} for details."
+            }
+        }
 }
