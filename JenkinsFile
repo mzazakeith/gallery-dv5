@@ -43,7 +43,7 @@ pipeline {
 
     post {
         success {
-         slackSend color: "good", message: "JOB_NAME : ${env.JOB_NAME}Build Number: ${env.BUILD_NUMBER} Success.Deployed at ${env.LIVE_SITE} See ${env.BUILD_URL}"
+         slackSend color: "good", message: "JOB_NAME : ${env.JOB_NAME} Build Number: ${env.BUILD_NUMBER} Success. Deployed at ${env.LIVE_SITE}. See ${env.BUILD_URL}"
         }
         failure {
           emailext subject: "Build Failure for ${env.JOB_NAME}",
