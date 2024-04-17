@@ -1,8 +1,8 @@
 require("dotenv").config();
 let config = {}
 
-let DB_USERNAME= process.env.DB_USERNAME || 'deploy-user'
-let DB_PASSWORD= process.env.DB_PASSWORD || 'QviknVGYr5tURxTt'
+let DB_USERNAME= process.env.DB_USERNAME
+let DB_PASSWORD= process.env.DB_PASSWORD
 
 // Update to have your correct username and password
 config.mongoURI = {
